@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="http://d3js.org/d3.v3.js"></script>
+
+    </head>
+    <body>
+        <script type="text/javascript">
+
+        d3.json("jan.json", function(data){
+            var i = 0;
+            var count = 0;
+            var margin = {top: 20, bottom: 20, right: 20, left: 20}
+            var width = 600;
+            var height = 600;
+
+            var svg = d3.select("body")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height)
+
+//-- Any Text before images are shown --//
+/*            var text = svg.selectAll("body")
+                .data([0])
+                .enter()
+                .append("text")
+                .text("Testing")
+                .attr("x", "40")
+                .attr("y", "60");
+*/
+            var imgs = svg.selectAll("body").data(data)
+                .enter()
+                .append("svg:image")
+                .attr("xlink:href", function (d) { return d.jan; })
+                .attr("x", function (d, i) { return i%9 * 120; })
+                .attr("y", function (d, i, j) { 
+                    if (j > i%9)
+
+                    return j+1; })
+                //.text(function (d) {return d.name;})
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                .attr("width", "80")
+                .attr("height", "80");
+
+            var imgs = svg.selectAll("body").data(feb)
+                .enter()
+                .append("svg:image")
+                .attr("xlink:href", function (d) { return d.feb; })
+                .attr("x", function (d, i) { return i * 120 + 20; })
+                //.text(function (d) {return d.name;})
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                .attr("width", "80")
+                .attr("height", "80");
+
+ /*           svg.selectAll("body").data([0])
+                .enter()
+                .append("svg:image")
+                .attr("xlink:href", function (d) { return d.link; })
+                .attr("x", "160")
+                .attr("y", "60")
+                .attr("width", "80")
+                .attr("height", "80");
+   */ 
+        })
+
+        </script>
+    </body>
+</html>
