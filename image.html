@@ -3,7 +3,24 @@
     <head>
         <meta charset="utf-8">
         <script src="http://d3js.org/d3.v3.js"></script>
-
+        <style type="text/css">
+            body {
+                font-family: "Verdana", Verdana, sans-serif;
+                background: #222;
+            }
+            div.tooltip {   
+              position: absolute;           
+              text-align: center;           
+              width: 100px;                  
+              height: 28px;                 
+              padding: 2px;             
+              font: 12px sans-serif;        
+              background: lightsteelblue;   
+              border: 0px;      
+              border-radius: 8px;           
+              pointer-events: none;         
+          }
+      </style>
     </head>
     <body>
         <script type="text/javascript">
@@ -16,10 +33,16 @@
             var width = 1366;
             var height = 768;
 
+            var div = d3.select("body").append("div")   
+                .attr("class", "tooltip")               
+                .style("opacity", 0);
+
             var svg = d3.select("body")
                 .append("svg")
                 .attr("width", width)
                 .attr("height", height)
+                
+                svg.call(one);
 
 //-- Any Text before images are shown --//
 /*            var text = svg.selectAll("body")
@@ -30,7 +53,10 @@
                 .attr("x", "40")
                 .attr("y", "60");
 */
-            var imgs = svg.selectAll("body").data(data)
+
+            function one(){
+            //var imgs = svg.selectAll("body").data(data)
+                svg.selectAll("body").data(data)
                 .enter()
                 .append("image")
                 .attr("xlink:href", function (d) { return d.jan; })
@@ -46,31 +72,28 @@
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
                 .attr("width", "80")
                 .attr("height", "80")
-                .on("dblclick", dblclick);
+                .on("dblclick", dblclick)
+                .on("mouseover", function(d) { 
+                    div.transition()
+                        .duration(500)    
+                        .style("opacity", 0)     
+                    div.transition()        
+                        .duration(200)      
+                        .style("opacity", .9)      
+                    div.html(
+                    '<a href= "'+d.jan+'" target="_blank">' +d.jan+"</a>")  
+                    .style("left", (d3.event.pageX) + "px")     
+                    .style("top", (d3.event.pageY - 28) + 
+                        "px");    
+                })                  
 
-                function dblclick(d){
-                    window.location.assign(d.jan);
-                }
+            }
+            
+            function dblclick(d){
+                window.location.assign(d.jan);
+            }
+            
 
-            var imgs = svg.selectAll("body").data(feb)
-                .enter()
-                .append("svg:image")
-                .attr("xlink:href", function (d) { return d.feb; })
-                .attr("x", function (d, i) { return i * 120 + 20; })
-                //.text(function (d) {return d.name;})
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-                .attr("width", "80")
-                .attr("height", "80");
-
- /*           svg.selectAll("body").data([0])
-                .enter()
-                .append("svg:image")
-                .attr("xlink:href", function (d) { return d.link; })
-                .attr("x", "160")
-                .attr("y", "60")
-                .attr("width", "80")
-                .attr("height", "80");
-   */ 
         })
 
         </script>
