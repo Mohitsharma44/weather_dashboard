@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+	font-family: "Verdana", Verdana, sans-serif;
+	background: #ADADAD;
+}
+
+p {
+    position: absolute;
+    left: 800px;
+    top: 0px;
+    z-index: -1;
+}
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var margin = {top: 30, right: 20, bottom: 30, left: 20},
+    width = 1300 - margin.left - margin.right,
+    height = 1100,
+    // To make Height dynamic, it is defined in function update.
+    barHeight = 20,
+    barWidth = width * 0.5;
+
+d3.csv("weather.csv", function(weather){
+  return{
+    Conditions: weather.Conditions,
+    Temp: weather.TemperatureF,
+    Date: weather.DateUTC
+}}, function(error,rows){
+
+var svg = d3.select("body").data(rows)
+  .append("text")
+  .text(function (d) {return d.Date})
+  .attr("fill", "black")
+  .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+});
+
+
+</script>
+</body>
