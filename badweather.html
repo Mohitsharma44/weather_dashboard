@@ -1,3 +1,12 @@
+<!--
+Javascript to show the images that failed to register
+using DST13 library. 
+
+Created by: Mohit Sharma (CUSP/NYU)
+Date: Sept 09 2014
+-->
+
+
 <!DOCTYPE html>
 <meta charset="utf-8">
 <style>
@@ -131,8 +140,9 @@ function update(source) {
       .attr("width", barWidth)
       .style("fill", color)
       .on("click", click)
-      .on("mouseover", hover)
       .call(static)
+      .on("mouseover", hover)
+      
 
 
 
@@ -156,79 +166,99 @@ function update(source) {
   	}
   }
 
+  function cleanstatic(){
+  	  	for (i = 13; i<25; i++ ){
+  		d3.select("#t"+i)
+  			.remove()
+  	}
+  }
+
 function static(){
+	svg.call(cleanstatic)
 	svg
       	.append("text")
+      	.attr("id","t13")
      	.attr("x", wx )
         .attr("y",  wy )
         .text("Temperature(F): ")
-        .attr("fill", "#EEEEEE")
+        .attr("fill", "#CCCCCC")
                 svg
       	.append("text")
+      	.attr("id","t14")
      	.attr("x", wx )
         .attr("y",  wy+30 )
         .text("Wind Speed(MPH): ")
-        .attr("fill", "#EEEEEE")
+        .attr("fill", "#CCCCCC")
                 svg
       	.append("text")
+      	.attr("id","t15")
      	.attr("x", wx*1.4 )
         .attr("y",  wy )
         .text("Humidity: ")
-        .attr("fill", "#EEEEEE")
+        .attr("fill", "#CCCCCC")
                 svg
       	.append("text")
+      	.attr("id","t16")
      	.attr("x", wx*1.4 )
         .attr("y",  wy+30 )
         .text("Visibility: ")
-        .attr("fill", "#EEEEEE")
+        .attr("fill", "#CCCCCC")
                 svg
       	.append("text")
+      	.attr("id","t17")
      	.attr("x", wx )
         .attr("y",  wy+60 )
         .text("Dew Point(F): ")
-        .attr("fill", "#EEEEEE")
+        .attr("fill", "#CCCCCC")
                 svg
       	.append("text")
+      	.attr("id","t18")
      	.attr("x", wx*1.4 )
         .attr("y",  wy+60 )
         .text("Gust Speed (MPH): ")
-        .attr("fill", "#EEEEEE")
+        .attr("fill", "#CCCCCC")
                 svg
       	.append("text")
+      	.attr("id","t19")
      	.attr("x", wx )
         .attr("y",  wy+90 )
         .text("Wind Direction: ")
-        .attr("fill", "#EEEEEE")
+        .attr("fill", "#CCCCCC")
                 svg
       	.append("text")
+      	.attr("id","t20")
      	.attr("x", wx*1.4 )
         .attr("y",  wy+90 )
         .text("Wind Direction Degree: ")
-        .attr("fill", "#EEEEEE")
+        .attr("fill", "#CCCCCC")
                 svg
       	.append("text")
+      	.attr("id","t21")
      	.attr("x", wx )
         .attr("y",  wy+120 )
         .text("Events: ")
-        .attr("fill", "#EEEEEE")
+        .attr("fill", "#CCCCCC")
                 svg
       	.append("text")
+      	.attr("id","t22")
      	.attr("x", wx*1.4 )
         .attr("y",  wy+120 )
         .text("Precipitation (In): ")
-        .attr("fill", "#EEEEEE")
+        .attr("fill", "#CCCCCC")
                 svg
       	.append("text")
+      	.attr("id","t23")
      	.attr("x", wx )
         .attr("y",  wy+150 )
         .text("Sea Level Pressure (In): ")
-        .attr("fill", "#EEEEEE")
+        .attr("fill", "#CCCCCC")
                 svg
       	.append("text")
+      	.attr("id","t24")
      	.attr("x", wx*1.4 )
         .attr("y",  wy+150 )
         .text("Weather Info Time: ")
-        .attr("fill", "#EEEEEE")
+        .attr("fill", "#CCCCCC")
 
 
 
